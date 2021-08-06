@@ -1,4 +1,12 @@
-\documentclass[12p, a4paper]{article}
+\documentclass[12p, a4paper, left = 3.5cm, right = 1.5cm, top = 2.5cm, bottom = 2cm]{article}
+
+\usepackage[headsepline, footsepline]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\ihead{Bachelorabschlussarbeit}
+\ohead{\headmark}
+\automark{section}
+\ifoot{Felix Bauer}
+\ofoot{\pagemark}
 
 \usepackage{listings}
 \lstset{numbers = left, numberstyle = \tiny, numbersep = 5pt, language = C, keywordstyle = \color{blue}, stringstyle = \color{teal}, commentstyle = \color{gray}, morecomment = [l][\color{orange}]{\#}}
@@ -17,9 +25,11 @@
 	\input{Einleitung}
 	\input{GegenstandundZiel}
 	%\input{Entwicklungsschritte}
-	\input{Hardware}
+	%\input{Hardware}
+	\include{Hardware}
 	\input{Software}
 	\input{Literatur}
 	\input{Abbildungen}
+	\input{Anhang}
 
 \end{document}
