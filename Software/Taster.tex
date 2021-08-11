@@ -1,0 +1,42 @@
+% !TEX root=BA-Bauer.tex
+
+\subsection{Taster}
+Um eine einwandfreie Funktion der Taster zu garantieren ist nicht nur deren Schlatung, sondern auch ein sntsprechender Programmcode wichtig. Im folgenden Kapitel wird auf den Programmcode, der zum auslesen eines Tasterdrucks benötit wird, eingegangen. Ein Tasterdruck kann zu jedem Zeitpunkt des Programmablaufs geschehen und sollte möglichst vom Porgrammcode nicht unbeachtet bleiben. Um diese Funktionalität zu gewährleisten, sind die Taster mit interruptfähigen Eingängen des MCUs verbunden. Die Beschaltung des Tasters mit einem im MCU internen Pull-Up-Widerstand sorgt dafür, dass an den Tastern im nicht betätigten Zustand ein High-Pegel und während der Betätigung ein Low-Pegel anliegt. Der Interrupt muss also auslösen, wenn sich ein Logikpegel von einem High- auf einen Low-Pegel ändert. In CubeMX werden die entsprechenden Konfiguartionen und Interruptaktivitäten der Taster-Pins eingestellt. Code-Ausschnitt \ref{code:btn.h} zegt einen Ausschnit aus der Datei button.h. Jedem Taster wird ein Zahlenwert mit der Basis 2 zugewiesen. Diese Spiegeln die Bits 1-4 eines Bytes wieder. Wird ein Taster betätigt, so wird  durch das Auslösen eines Interrupts die Funktion in Zeile 12 aufgerufen.
+\lstinputlisting[
+caption = button.h: Definitionen und Funktionsprototypen
+label = code:btn.h, 
+language = C, 
+firstnumber = 5, 
+firstline = 5, 
+lastline = 12]
+{/Users/Felix/Documents/CubeMX/BPA-Code/Core/Inc/button.h} 
+Codeausschnitt \ref{code:btn.c} zeigt einen Teil der Interrupt-Funktion. Zunächst wird in Zeile 30 geprüft ob in den letzten 200\,ms ($DELAYTIME$) bereits ein Aufruf der Funktion erfolgt ist. Diese Abfrage soll mehrfache Eingaben, augelöst durch ein Prellen des Tasters verhindern. Falls sie bereits aufgerufen wurde, so wird die Funktion beendet, falls nicht wird die Variable $last\_updated$ mit der aktuellen Zeit aktualisiert. Daraufhin wird mithilfe von einem $switch$ festgestellt ob und welcher Taster den Interrupt ausgelöst hat. Dafür wird die Variable $GPIO-Pin$, welche an die Interuptfunktion übergeben wird, mit den einzelnen Pins der Taster verglichen. 
+\lstinputlisting[
+caption = button.c: Codeausschnitt Taster-Interruptfunktion,
+label = code:btn.c, 
+language = C, 
+firstnumber = 28, 
+firstline = 28, 
+lastline = 33]
+{/Users/Felix/Documents/CubeMX/BPA-Code/Core/Src/button.c}
+Ist der auslösende Pin festgestellt so wird der Variable $presses$ mithilfe einer bitweisen $oder$-Operation der entsprechende Wert des Taster, der in der Datei $button.h$ definiert ist, wie folgt zugewiesen.
+\lstinputlisting[
+caption = button.c: Bitweise Zuordnung eines betätigten Tasters,
+label = code:bitwise_or, 
+language = C, 
+firstnumber = 37, 
+firstline = 37, 
+lastline = 41]
+{/Users/Felix/Documents/CubeMX/BPA-Code/Core/Src/button.c}
+Der Vorteil der bitweisen $oder$-Operation ist, dass nur das entsprechende Bit gesetzt wird ohne alle anderen zu verändern. Ergänzende Abfragen ob das Bit bereits gesetzt ist entfallen.
+Im Hauptprogramm werden ausschließlich die Funktionen $Button\_pressed(uint8\_t)\ button)$ für die Abfrage ob ein bestimmter Taster betätigt wurde und $Button\_reset()$ um die Variable $presses$ zurückzusetzen verwendet. Bei der Abfrage eines Tasters wird das entsprechende Bit wieder zurückgesetzt. Wurden zwei verschiedene Taster innerhalb kurzer Zeit betätigt, können beide nacheinander mit der Funktion $Button\_pressed$ abgefragt werden. Codeausschnit \ref{code:btn_pressed} zeigt den Inhalt dieser Funktion. Zunächst folgt eine $if$-Abfrage wann die letzte Tastereingabe einging. Ist die Eingäbe nicht älter als der Wert von $TIMEOUT$, so wird zunächst die temporäre Variable $temp$ mit dem abgefragten Bit beschrieben und anschließend das abgefragte Bit aus der Variable mit einer $0$ überschrieben. Der Rückgabewert der Funktion ist die Variable $temp$. Im Hauptprogramm kann anhand eines Rückgabewertes ungleich $0$ erkannt werden, dass der oder einer der abgefragten Taster betätigt wurde.
+\lstinputlisting[
+caption = button.c: Abfrage eines Tasters,
+label = code:btn_pressed, 
+language = C, 
+firstnumber = 10, 
+firstline = 10, 
+lastline = 21]
+{/Users/Felix/Documents/CubeMX/BPA-Code/Core/Src/button.c}
+\textbf{Optimierungsmöglichkeiten}\\
+Die Konstante $TIMEOUT$ besitzt keine Zuordnung zu einem einzelnen Taster. Wurde vor längerer Zeit ein Taster betätigt und kurz vor der Abfrage ein anderer Taster betätigt, so scheint die Betätigung des ersten Tasters auch innerhab der Timeout-Zeit geschehen zu sein. Dieses Problem kann gelöst werden, indem eine Variable pro Taster angelegt wird, in der die Zeit der letzten Betätigung des Tasters gespechert wird. Diese ersetzt die globale letzte Aktualisierungszeit $last\_updated$. Der Nachteil dieser Methode ist eine deutlich aufwendigere Abfrage in der Funktion $Button\_pressed$ und Zuweisung in der Interrupt-Funktion. Eine zweite Möglichkeit das Problem zu lösen ist der Einsatz eines Timers. Dieser wird gestartet wenn ein Taster betätigt wird. Läuft der Timer über, wird in der Interrupt-Funktion des Timers der Betätigungszustand in der Variable $presses$ für alle Taster zurückgesetzt. Soll nur der Zustand eines Tasters zurückgesetzt werden, so muss je ein Timer pro Taster zur Verfügung stehen, da in der Interupt-Funktion des Timers nicht untrschieden werden kann welcher Taster den Timer gestartet hat.

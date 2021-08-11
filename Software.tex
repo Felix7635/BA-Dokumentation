@@ -2,13 +2,30 @@
 
 \newpage
 \section{Software}
-\subsection{STMicroelectronics CubeIDE \& CubeMX}
+\input{Software/CubeMX}
+\input{Software/CubeIDE}
+\input{Software/Taster}
 \subsection{Aufnahmefunktionen}
 \subsubsection{Endlos}
 \subsubsection{Feste Aufnahmezeit}
 \subsubsection{Step-Aufnahme}
 \subsection{Wiedergabefunktionen}
 \subsection{LED}
+%Timer für Helligkeitsregelung
+%Ein Aus- per GPIO read/write
 \subsection{LCD}
+%Benutzte Bibliothek
+%Änderungen an der Bib:
+	%Änderung auf 4x20
+	%init Funktion
+	%clear -> Cursor auf 0,0
 \subsection{Encoder}
+%Interruptbasiert
+%Abfrage nacheinander
+%entprellung
+%globaler Counter
 \subsection{SD-Karte (SDIO)}
+%init
+%Auffangen bei Fehler beim Start
+%mounting etc.
+%1-bit/4-bit
