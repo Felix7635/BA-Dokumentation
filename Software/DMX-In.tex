@@ -1,0 +1,82 @@
+% !TEX root = BA-Bauer.tex
+
+\subsection{Aufnahme eines DMX-Datenpaketes}
+Die Aufnahme eines DMX-Datenpaketes zählt zu den kritischsten Zeilen Programmcode des gesamten Projekts. Wird das erste Datenbyte nicht registriert, hat das bei der Wiedergabe, aufgrund der seriellen Übertragung des DMX-Protokolls, Auswirkungen auf alle angeschlossenen Geräte. 
+Die Aufnahme eines Datenpaketes basiert auf den Interrupt-Events der UART-Schnittstelle. Bei jedem empfangenen oder gesendetem Datenbyte, erkannten Fehler der Übertragung oder der Schnittstelle wird ein globaler Interrupt ausgelöst. In der aufgerufenen Funktion wird identifiziert was den Interrupt ausgelöst hat und es wird ein entsprechender Code ausgeführt. Für die Aufnahme sind die Events des $Framing\ Errors$ und des erfolgreichen Empfangs eines Datenbytes von Bedeutung. Mithilfe des $Framing\ Errors$ wird das Ende eines DMX-Datenpaketes erkannt.
+\begin{lstlisting}[caption = stm32f4xx\_it.c: UART Framing Error,
+	label = code:itFE, 
+	language = C, 
+	firstnumber = 349]
+/* UART frame error interrupt occurred -----------------------------------*/
+if (((isrflags & USART_SR_FE) != RESET) && ((cr3its & USART_CR3_EIE) != RESET))
+{
+	Clear_Rx_Error();
+	huart4.ErrorCode |= HAL_UART_ERROR_FE;
+}
+\end{lstlisting}
+\begin{lstlisting}[caption = stm32f4xx\_it.c: UART Clear\_Rx\_Error(),
+	label = code:itErrorclear, 
+	language = C, 
+	firstnumber = 426]
+static void Clear_Rx_Error()
+{
+	uint16_t tmp = huart4.Instance->SR;
+	tmp = huart4.Instance->DR;
+	(void) tmp;
+	Reset_Rx();
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption = stm32f4xx\_it.c: UART Reset\_Rx(),
+	label = code:itResetRx, 
+	language = C, 
+	firstnumber = 434]
+static void Reset_Rx()	//Rx complete or Error ->dmx-brake
+{
+	huart4.RxXferCount = 513;
+	huart4.RxXferSize = 513;
+	huart4.pRxBuffPtr = Univers.RxBuffer;
+	(void)*huart4.pRxBuffPtr--;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[caption = stm32f4xx\_it.c: UART Save\_Byte\_Rx(),
+	label = code:itSaveByte, 
+	language = C, 
+	firstnumber = 442]
+static void Save_Byte_Rx()
+{
+	if(huart4.Instance->DR != 1)
+	*huart4.pRxBuffPtr++ = huart4.Instance->DR; //DR in Buffer speichern
+	else
+	*huart4.pRxBuffPtr++ = 0;
+	
+	if(--huart4.RxXferCount == 0U)
+	{
+		//save to SD
+		HAL_UART_RxCpltCallback(&huart4);
+		Reset_Rx();
+	}
+}
+\end{lstlisting}
+
+\lstinputlisting[
+caption = DMX.c: Callback-Funktion eingehender UART-Daten,
+label = code:dmx.c-rxIT, 
+language = C, 
+firstnumber = 103, 
+firstline = 103, 
+lastline = 113]
+{/Users/Felix/Documents/CubeMX/BPA-Code/Core/Src/DMX.c}
+
+%Funktioniert:
+%\lstinputlisting[
+%caption = DMX.c: Callback-Funktion eingehenderxxxx UART-Daten,
+%label = code:dmx.c-rxITxxx, 
+%language = C, 
+%firstnumber = 103, 
+%firstline = 103, 
+%lastline = 113]
+%{/Users/Felix/Documents/CubeMX/BPA-Code/Core/Src/stm32f4xx_it.c}
+
+\textbf{Optimierungsmöglichkeiten}\\
