@@ -1,7 +1,8 @@
 % Encoding: UTF-8
 
-@Article{Bauer2021,
+@PhdThesis{Bauer2021,
   author = {Felix Bauer},
+  school = {Hochschule für angwandte Wissenschaft und Kunst Hildesheim, Holzminden, Göttingen},
   title  = {Prototypentwicklung eines {A}ufnahme- und {W}iedergabegerätes für {DMX}-{D}aten},
   year   = {2021},
   file   = {:/Users/Felix/Google Drive/BPA/Abgabe/Bachelorpraxisprojektarbeit Felix Bauer 29_01_2021.pdf:PDF},
@@ -29,18 +30,19 @@
 STM32 Nucleo64 boards (MB1136)},
   file     = {:/Users/Felix/Google Drive/BPA/Abgabe/Anhang A2/Hardware/Datenblätter/STM32 Nucleo User Manual.pdf:PDF},
 }
-@Inbook{Ehrhardt1992,
-author="Ehrhardt, Dietmar",
-title="PLL (Phase Locked Loop)",
-bookTitle="Verst{\"a}rkertechnik",
-year="1992",
-publisher="Vieweg+Teubner Verlag",
-address="Wiesbaden",
-pages="270--278",
-abstract="Eine Phasenregelschleife (PLL, Phase Locked Loop) ist ein Schaltkreis der einem externen Referenzsignal erlaubt, die Frequenz und die Phase eines Oszillators in der Schleife zu steuern. Die Frequenz des Oszillators in der Schleife kann dabei dieselbe wie die Referenzfrequenz sein oder ein Vielfaches davon. Wenn die Referenzfrequenz von einem Quarzoszillator kommt, k{\"o}nnen daraus mittels der PLL Frequenzen abgeleitet werden, die dieselbe Stabilit{\"a}t besitzen wie die des Quarzoszillators (z.B. bei der Anwendung als Synthesizer).",
-isbn="978-3-322-83026-5",
-doi="10.1007/978-3-322-83026-5_24",
-url="https://doi.org/10.1007/978-3-322-83026-5_24"
+
+@InBook{Ehrhardt1992,
+  author    = {Ehrhardt, Dietmar},
+  pages     = {270--278},
+  publisher = {Vieweg+Teubner Verlag},
+  title     = {{PLL} ({P}hase {L}ocked {L}oop)},
+  year      = {1992},
+  address   = {Wiesbaden},
+  isbn      = {978-3-322-83026-5},
+  abstract  = {Eine Phasenregelschleife (PLL, Phase Locked Loop) ist ein Schaltkreis der einem externen Referenzsignal erlaubt, die Frequenz und die Phase eines Oszillators in der Schleife zu steuern. Die Frequenz des Oszillators in der Schleife kann dabei dieselbe wie die Referenzfrequenz sein oder ein Vielfaches davon. Wenn die Referenzfrequenz von einem Quarzoszillator kommt, k{\"o}nnen daraus mittels der PLL Frequenzen abgeleitet werden, die dieselbe Stabilit{\"a}t besitzen wie die des Quarzoszillators (z.B. bei der Anwendung als Synthesizer).},
+  booktitle = {Verst{\"a}rkertechnik},
+  doi       = {10.1007/978-3-322-83026-5_24},
+  url       = {https://doi.org/10.1007/978-3-322-83026-5_24},
 }
 
 @Manual{QuartzMN,
@@ -66,22 +68,23 @@ url="https://doi.org/10.1007/978-3-322-83026-5_24"
   file         = {:documents/Datasheets/MAX14945-964806.pdf:PDF},
 }
 
-@Article{LDO,
-  author  = {ITWissen.info},
-  journal = {abgerufen: 05.07.2021},
-  title   = {{L}{D}{O} (low dropout)},
-  year    = {2016},
-  month   = jan,
-  volume  = {Webseite},
-  url     = {https://www.itwissen.info/LDO-low-dropout-LDO-Regler.html},
+@Misc{LDO,
+  author = {ITWissen.info},
+  month  = jan,
+  note   = {abgerufen: 05.07.2021},
+  title  = {{L}{D}{O} (low dropout)},
+  year   = {2016},
+  url    = {https://www.itwissen.info/LDO-low-dropout-LDO-Regler.html},
+  volume = {Webseite},
 }
 
-@Article{NE555,
+@Misc{NE555,
   author    = {conrad.de},
+  note      = {abgerufen: 29.08.2021},
   title     = {N{E}555 {S}chaltungen - {A}ufbau \& {F}unktionsweise des {T}imers erklärt},
-  volume    = {Webseite},
   timestamp = {2021-07-06},
   url       = {https://www.conrad.de/de/ratgeber/handwerk-industrie-wiki/elektronik-bauteile/ne555.html},
+  volume    = {Webseite},
 }
 
 @Manual{EncoderMN,
@@ -107,32 +110,32 @@ LE212},
   volume    = {Band},
 }
 
-@Article{eagle_homepage,
+@Misc{eagle_homepage,
   author = {Autodesk.com},
+  note   = {abgerufen: 26.07.2021},
   title  = {What is {E}{A}{G}{L}{E}},
-  note   = {Zugriff am 26.07.2021},
-  volume = {Webseite},
   url    = {https://www.autodesk.com/products/eagle/overview},
+  volume = {Webseite},
 }
 
-@Article{USB-PD,
-  author   = {U{S}{B} {I}mplementers {F}orum, {I}nc.},
+@Standard{USB-PD,
   title    = {Universial {S}erial {B}us {P}ower {D}elivery {S}pecifikation},
-  year     = {2017},
+  author   = {U{S}{B} {I}mplementers {F}orum, {I}nc.},
   month    = jan,
+  url      = {https://www.usb.org/document-library/usb-power-delivery},
+  year     = {2017},
   abstract = {Revision 2.0
 Version 1.3
 Realease date: 12 January 2017},
   file     = {:/Users/Felix/Downloads/USB Power Delivery 20210706/USB PD R2.0 V1.3 20171117/USB_PD_R2_0 V1.3 - 20170112.pdf:PDF},
-  url      = {https://www.usb.org/document-library/usb-power-delivery},
 }
 
-@Article{USB-Battery,
-  author   = {U{S}{B} {I}mplementers {F}orum, {I}nc.},
+@Standard{USB-Battery,
   title    = {Battery {C}harging {S}pecification},
-  year     = {2012},
+  author   = {U{S}{B} {I}mplementers {F}orum, {I}nc.},
   month    = mar,
   number   = {Revision 1.2},
+  year     = {2012},
   abstract = {(Including errata and ECNs through March 15, 2012)
 Revision 1.2
 March 15, 2012},
@@ -162,6 +165,25 @@ March 15, 2012},
   year         = {2020},
   abstract     = {The TEA 1 is an unregulated 1 Watt DC/DC SIP-4 converter series which is specifically designed to offer a low-cost solution while keeping a high quality standard. This new series focuses on a simple but effective design approach, which minimizes component and labor cost and is complemented with a com- plete automatization of the manufacturing process. An operating temperature range from -40°C to 85°C without derating and an I/O-isolation of 1’500 VDC enables this series to cover many different applications. The industry standard package of this converter offers a broad application range in any space, cost critical application and is especially suited for high volume projects where sim- ple but reliable products are needed.},
   file         = {:documents/Datasheets/Traco Power DC\:DC Converter.pdf:PDF},
+}
+
+@Misc{FATFS,
+  author       = {Elm Chan},
+  howpublished = {Webseite},
+  month        = apr,
+  note         = {abgerufen: 19.08.2021},
+  title        = {Fat{F}s - {G}eneric {FAT} {F}ilesystem {M}odule},
+  year         = {2021},
+  abstract     = {FatFs is a generic FAT/exFAT filesystem module for small embedded systems. The FatFs module is written in compliance with ANSI C (C89) and completely separated from the disk I/O layer. Therefore it is independent of the platform. It can be incorporated into small microcontrollers with limited resource, such as 8051, PIC, AVR, ARM, Z80, RX and etc. Also Petit FatFs module for tiny microcontrollers is available here.},
+  url          = {http://elm-chan.org/fsw/ff/00index_e.html},
+}
+
+@Misc{CubeIDE,
+  author = {STMicroelectronics},
+  note   = {abgerufen: 25.08.2021},
+  title  = {{STM}32{C}ube{IDE} - {I}ntegrated {D}evelopment {E}nviroment for {STM}32},
+  year   = {2021},
+  url    = {https://www.st.com/en/development-tools/stm32cubeide.html},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
