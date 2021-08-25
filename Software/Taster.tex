@@ -3,7 +3,7 @@
 \subsection{Taster}
 Um eine einwandfreie Funktion der Taster zu garantieren ist nicht nur deren Schaltung, sondern auch ein entsprechender Programmcode wichtig. Im folgenden Kapitel wird auf den Programmcode, der zum auslesen eines Tasterdrucks verwendet wird, eingegangen. Ein Tasterdruck kann zu jedem Zeitpunkt des Programmablaufs geschehen und sollte möglichst vom Porgrammcode nicht unbeachtet bleiben. Um diese Funktionalität zu gewährleisten, sind die Taster mit interruptfähigen Eingängen des MCUs verbunden. Die Beschaltung des Tasters mit einem im MCU internen Pull-Up-Widerstand sorgt dafür, dass an den Tastern im nicht betätigten Zustand ein High-Pegel und während der Betätigung ein Low-Pegel anliegt. Der Interrupt muss also auslösen, wenn sich ein Logikpegel von einem High- auf einen Low-Pegel ändert. In CubeMX werden die entsprechenden Konfiguartionen und Interruptaktivitäten der Taster-Pins eingestellt. Code-Ausschnitt \ref{code:btn.h} zeigt einen Ausschnit aus der Datei button.h. Jedem Taster wird ein Zahlenwert mit der Basis 2 zugewiesen. Diese Spiegeln die Bits 1-4 eines Bytes wieder. Wird ein Taster betätigt, so wird  durch das Auslösen eines Interrupts die Funktion in Zeile 12 aufgerufen.
 \lstinputlisting[
-caption = button.h: Definitionen und Funktionsprototypen
+caption = button.h: Definitionen und Funktionsprototypen,
 label = code:btn.h, 
 language = C, 
 firstnumber = 5, 
