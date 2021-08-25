@@ -1,0 +1,26 @@
+% !TEX root = BA-Bauer.tex
+
+\subsection{SD-Karte (SDIO)}
+
+Die von CubeMX generierte Initialisierungs-Funktion der SDIO-Schnittstelle führt beim Start des Gerätes oft zu Fehlern, wodurch die SD-Karte weder gelesen noch beschrieben werden kann. In der Regel fällt das Programm dann in eine endlose Fehler-Funktion und ein Neustart des Geräts erwirkt keine Änderung. Um dieses Problem zu lösen, wird nach den von CubeMX generierten Initialisierungsfunktionen im Hauptprogramm eine weitere Funktion zur Initialisierung der Verbindung mit der SD-Karte aufgerufen, dessen wesentlicher Inhalt in Codeausschnitt \ref{code:SDinit} zu sehen ist.
+\lstinputlisting[
+caption = SD Initialisierungs-Funktion,
+label = code:SDinit,
+firstline = 284,
+firstnumber = 284,
+lastline = 295]
+{/Users/Felix/Documents/CubeMX/BPA-Code/Core/Src/main.c}
+Um eine SD-Karte verwenden zu können, muss diese als erstes mithilfe der Funktion $f\_mount(...)$ \"montiert\" werden. Dabei wird ein Dateisystem $filesystem$ und ein Dateipfad $path$ mit der Hardware verknüpft. Bei diesem Schritt treten in der Regel Fehler auf. Ist der Rückgabewert der Funktion $f\_mount(...)$ nicht $FR\_OK$ werden die Zeilen 285 bis 294 so lange wiederholt bis die SD-Karte erfolgreich montiert ist, denn ohne ein das Speichermedium ist das Gerät in einerlei Hinsicht benutzbar. Der aktuelle Status der SD-Karte wird als erstes der Variable $sd\_state$ zugewiesen. Befindet sich keine SD-Karte im SD-Kartenslot ($STA\_NODISK$) wird eine entsprechende Meldung über das LCD-Display an den Benutzer gegeben. Ist der Status der SD-Karte $STA\_NOINIT$, sow wird das Montieren de SD-Karte zunächst rückgängig gemacht, indem erneut die Funktion $f\_mount(...)$ aufgerufen wird, jedoch wird der Wert 0 als Dateisystem-Übergabeparameter der Funktion übergeben. daaufhin wird die Variable des Dateisystem mithilfe der $memset(...)$ Funktion mit 0 initiaisiert und eine erneute SD-Initialisierung gestartet. %Warum genau wird SD_initialize ausgeführt? path wird nicht zurückgesetzt?! Vielleicht um path zurückzusetzen?
+Die Schleife startet erneut mit einem weiteren Versuch der Montierung.
+
+Codeausschnitt \ref{code:SDread} zeigt einen Beispielhaften Ablauf eines Lesevorgangs von der SD-Karte. Der Vogang startet mit dem Öffnen einer Datei, zu sehen in Zeile 1009. Mit dem Parameter $FA\_READ$ wird der Funktion mitgeteilt, dass die Datei gelesen werden soll. Der Parameter $FA\_OPEN\_ALWAYS$ sorgt dafür, dass die Datei geöffnet wird wenn sie existiert, ansonsten wird eine Datei mit dem entspechenden Dateinamen erstellt. In dem gezeigten Beispiel wird von der Existenz der Datei ausgegangen. Mit dem Parameter $FA\_OPEN\_EXISTING$ wird eine bereits existierende Datei geöffnet. Falls sie nicht existiert gitb die Funktion einen entsprechenden Fehlercode zurück. Soll eine Datei beschrieben werden, muss der Parameter $FA\_WRITE$ übergeben werden.
+\lstinputlisting[
+caption = Beispiel Lesevorgang der SD-karte,
+label = code:SDread,
+firstline = 1009,
+firstnumber = 1009,
+lastline = 1016]
+{/Users/Felix/Documents/CubeMX/BPA-Code/Core/Src/DMX.c}
+Nachdem die Datei geöffnet ist, werden Daten mit der Funktion $f\_read(...)$ aus der Datei gelesen. Der erste Übergabeparameter ist das Objekt der Datei aus der gelesen werden soll. Darauf folgt die Adresse der Zielvariable in der die gelesen Daten gespeichert werden sollen. An dritter Stelle steht die Anzahl der zu lesenden Bytes. Der letzte Übergabeparameter ist die Adresse einer Variable in der die Anzahl der tatsächlich gelesenen Bytes gespeichert wird. Durch einen nachfolgenden Vergleich der Soll und Ist Anzahl der Bytes können Fehler identifiziert werden \cite{FATFS}. Nachdem alle Lesevorgänge beendet sind, muss die Datei mit der Funktion $f\_close(...)$ wieder gechlossen werden, da die Anzahl der gleichzeitig geöffneten Dateien begrenzt ist um Speicherprobleme auszuschließen.\\
+\textbf{Optimierungsmöglichkeiten}\\
+In der aktuellen Version des Programms wird der 1-Bit-Modus der SDIO-Schnittstelle verwendet. Von den vier vorhandenen Datenleitungen wird nur eine in diesem Modus verwendet. Auf der Platine sind zusätzliche Leiterbahnen für die Verwendung eines 4-Bit-Modus vorhanden. Scheinbar befinden sich Fehler in der SDIO-Bibliothek in CubeMX, wodurch der montier-Vorgang nicht durchgeführt werden kann. Durch die Verwendung des 4-Bit-Modus könnte die Lese- und Schreibgeschwindigkeit der SD-Karte im bestmöglichen Fall vervierfacht werden und trägt damit zur Stabilität während der Aufnahme und Wiedergabe bei.
