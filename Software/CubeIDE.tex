@@ -1,7 +1,13 @@
-% !TEX root = BA-Baue.tex
+% !TEX root = BA-Bauer.tex
 
-\subsection{STMicroelectronics CubeIDE}
-%compiler
-%debugger
-%basiert auf eclipse
-%vielleichtauch ein iunnötiges Kapitel
+\subsection{STMicroelectronics STM32CubeIDE}
+Nachdem der Grundcode von CubeMX generiet ist, wird der Programmcode mithilfe der Entwicklungsumgebung STM32CubeIDE von STMicroelectronics erstellt. Sie ist speziell für die Entwicklung von Programmcode für STM32 Mikcontroller und -prozessoren ausgelegt und beinhaltet neben der Kompilierung von Code auch debugging-Funktionalität. Durch die Einbindung von CubeMX in der Entwicklungsumgebung wird keine weitere Software zum porgrammieren eines STM32 Mikrocontrollers oder -prozessors benötigt. Jederzeit kann die Kofiguration in CubeMX geändert und ein neuer Grundcode generiert werden \cite{CubeIDE}. Code der vom Benutzer geschrieben wurde, wird bei diesem Vorgang nicht verändert. Voraussetzung dafür ist die richtige Position des Benutzer-Programmcodes innerhalb der $USER\ CODE$-Blöcke (\ref{code:usercode}).
+\lstinputlisting[
+caption = main.c: USER CODE Block,
+label = code:usercode, 
+language = C, 
+firstnumber = 106, 
+firstline = 106, 
+lastline = 108]
+{/Users/Felix/Documents/CubeMX/BPA-Code/Core/Src/main.c}
+Code der zwischen der $BEGIN$ und $END$-Zeile geschrieben steht, wird bei einer Neugenerierung beibehalten. Diese Blöcke finden sich an verschiedenen Stellen und Dateien wieder.
