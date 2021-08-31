@@ -1,0 +1,8 @@
+% !TEX root = BA-Bauer.tex
+
+\subsection{Wiedergabefunktion}
+Im Gegensatz zu den mehreren Aufnamefunktionen gibt es für die Wiedergabe der DMX-Daten nur eine Wiedergabefunktion. Aus den auf der SD-Karte während der Aufnahme gespeicherten Informationen in der $.NFO$-Datei kann bestimmt werden, wie die gespeicherten Daten wiedergegeben werden müssen. Zunächst startet die Funktion mit der Auswahl der wiederzugebenen Aufnahmedatei. Dafür wird die SD-Karte nach Dateien durchsucht die eine $.DMX$ Dateiendung besitzen. Die Dateinamen werden dann auf dem Display angezeigt und können durch das Drehen des Encoders ausgewählt werden. Mit dem Bestätigungs-Taster wird die Auswahl festgelegt und das erste Datenbyte gelesen. Auf dem Display erscheint eine Abfrage ob die Wiedergabe gestartet werden soll. Wird ein weiteres Mal der Bestätigungstaster betätigt, startet die Wiedergabe. Sie kann mit einer Betätigung des Zurück-Tasters gestoppt werden.
+
+\subsubsection{Ablauf der Wiedergabefunktion}
+
+\input{Software/DMX-Out}
