@@ -1,6 +1,6 @@
 % !TEX root = BA-Bauer.tex
 
-\subsection{Aufnahme eines DMX-Datenpaketes}
+\subsubsection{Aufnahme eines DMX-Datenpaketes}
 Die Aufnahme eines DMX-Datenpaketes zählt zu den kritischsten Zeilen Programmcode des gesamten Projekts. Wird das erste Datenbyte nicht registriert, hat das bei der Wiedergabe, aufgrund der seriellen Übertragung des DMX-Protokolls, Auswirkungen auf alle angeschlossenen Geräte. 
 Die Aufnahme eines Datenpaketes basiert auf den Interrupt-Events der UART-Schnittstelle. Bei jedem empfangenen oder gesendetem Datenbyte, erkannten Fehler der Übertragung oder der Schnittstelle wird ein globaler Interrupt ausgelöst. In der aufgerufenen Funktion wird identifiziert was den Interrupt ausgelöst hat und es wird ein entsprechender Code ausgeführt. Für die Aufnahme sind die Events des $Framing\ Errors$ und des erfolgreichen Empfangs eines Datenbytes von Bedeutung. Mithilfe des $Framing\ Errors$ wird das Ende eines DMX-Datenpaketes erkannt. Codeausschnitt \ref{code:itSaveByte}, \ref{code:dmx.c-rxIT}, \ref{code:itFE}, \ref{code:itErrorclear} und \ref{code:itResetRx} zeigen Ausschnitte aus der globalen UART-Interruptfunktion, die wesentlich für den Empfang von DMX-Datenpaketen sind. Die folgende Funktion wird aufgerufen wenn ein Datenbyte ohne einen Fehler vollstänig empfangen und bereit zum lesen ist. 
 \begin{lstlisting}[caption = stm32f4xx\_it.c: UART Save\_Byte\_Rx(),
