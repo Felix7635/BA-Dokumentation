@@ -1,22 +1,23 @@
 % !TEX root = BA-Bauer
 
 \newpage
-\section{Gegenstand und Ziel der Arbeit}
+\section{Ziel der Arbeit}
 
-Gegenstand und Ziel der Arbeit ist die Etwicklung eines für den Endbenutzer ausgelegten Gerätes zur Aufnahme und Wiedergabe von DMX-Daten. Die Entwicklung umfasst das Erstellen einer entsprechenden elektrischen Schaltung, das Planen und Herstellen einer zugehörigen Platine, sowie das Bestücken dieser. Die Platine soll in einem passenden Gehäuse eingebaut werden. Außerdem wird eine Software entwickelt, die zum einen die Aufnahme und Wiedergabe der DMX-Daten ermöglicht und zum Anderen eine Benutzerschnittstelle bildet mit der der Benutzer das Gerät möglichst intuitv bedienen kann. Grundlegende Funktionsprinzipien sind bereits in der vorangegangenen Bachelorpraxisprojektarbeit aufgezeigt worden \cite{Bauer2021}, welche in dieser Arbeit weiterentwickelt und erweitert werden. \\Folgende Haupt- und Nebenanforderungen sind für die Entwicklung definiert. \\
+In dieser Arbeit werden die in der vorangegangenen Praxisprojektarbeit erarbeiteten Funktionsprinzipien für die Aufnahme und Wiedergabe von DMX-Daten mit einem Mikrocontroller weiterentwickelt und in ein für den Endbenutzer ausgerichtetes Gerät implementiert. Ziel dabei ist die Herstellung eines Prototyps eines DMX-Aufnahme und -Wiedergabegerätes, welches eine gewisse marktreife darstellt. Zusätzlich zu den Inhalten der Praxisprojektarbeit wird eine umfassende Benutzerschnittstelle entwickelt, mit der dem Benutzer ohne spezielle Vorkenntnisse die Bedienung des Geräts ermöglicht wird. Konkret werden Taster und Drehgeber für die Eingaben des Benutzer, ein Display und LEDs für Rückmeldungen an den Benutzer verwendet. Durch die Zunahme an Funktionlität und Anzahl der Komponenten wird außerdem die elektrische Schaltung der Praxisprojektarbeit dementsprechend erweitert und an bereits vorhandenen Stellen optimiert. Für die erweiterte Schaltung wird eine Platine entwickelt, hergestellt und bestückt. Zudem wird ein passendes, kompaktes Gehäuse für die Platine gestaltet und Hergestellt. Damit ist bereits die optische Sichtweise auf eine gewisse Marktreife sichtbar.
 
-\hspace*{-5mm}\textbf{Hauptanforderungen:}\\
+Für die neu hinzugekommene Benutzerschnittstelle sind nicht nur die Komponenten wichtig, sondern auch die Software die sie steuert. Dafür wird entsprechender Programmcode entwickelt der dem Benutzer sinnvolle und auswertbare Rückmeldung gibt und ihm eine intuitive Bedienung des Gerätes ermöglichen. Dem Benutzer sollen außerdem Möglichkeiten gegeben sein, gewisse Einstellungen vorzunehmen um die Funktion des Gerätes auf die eigenen Bedürfnisse anzupassen. Ein besonderes Augenmerkt liegt auf der Optimierung der Aufnahme, Wiedergabe und Speicherung der DMX-Daten. Auch hier sollen dem Benutzer möglichst viele Freiheiten eingeräumt werden. Die in der Praxisprojektarbeit erarbeiteten Grundlagen werden dafür verwendet, erweitert und optimiert. Zudem werden die Optimierungsvorschläge der Praxisprojektarbeit berücksichtigt und zum Teil umgesetzt. Für die Entwicklung des Gerätes sind folgende Haupt- und Nebenanforderungen definiert.\\
+\newline
+\textbf{Hauptanforderungen:}\\
 - Möglichkeit mehrere Aufnahmen anzulegen\\
 - Einstellbare Aufnahmezeit\\
-- Aufname eines DMX-Stroms und -Standbildern\\
-- Benutzeroberfläche mit Display und Menüführung\\
+- Aufname eines DMX-Stroms und einzelner DMX-Datenpakete\\
+- Benutzerschnittstelle mit Display und Menüführung\\
 - Maßgeschneidertes Platinendesign\\
 - Gehäuse\\
 - Handliche Größe\\
-
-\hspace*{-5mm}\textbf{Nebenanforderungen:}\\
-- Intuitive Benutzbarkeit\\
+\newline
+\textbf{Nebenanforderungen:}\\
+- Intuitive Benutzerschnittstelle\\
 - Optisch Ansprechendes Design des Gehäuses\\
 - Optimierung des Speicherbedarfs auf der SD-Karte\\
 - Möglichkeit die Wiedergabegeschwindigkeit während der aktiven Wiedergabe zu ändern\\
-
