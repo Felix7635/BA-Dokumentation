@@ -11,7 +11,7 @@ Licht emmittierende Dioden (LED) sind ein essentieller Bestandteil der Benutzers
 				blau & Eingeschaltet bei aktiver Spannungsversorgung des Geräts\\
 				rot & Zustandsänderung bei eingehendem DMX-Datenpaket\\
 				blau & Zustandsänderung bei ausgehendem DMX-Datenpaket\\
-				orange & Eingeschaltet bei SD-Aktivität\\
+				orange & Eingeschaltet bei Schreib- oder Lesevorgängen der SD-Karte\\
 				grün & Allgemeine Zustandsanzeige
 		\end{tabular}
 		\caption{LED Funktionen}
@@ -26,7 +26,7 @@ Die erste blaue LED wird direkt an die 5\,V Versorgungsspannung, ausgehend von d
 		\label{fig:LED-Schaltung}
 	\end{center}
 \end{figure}
-Abbildung \ref{fig:LED-Schaltung} zeigt die Verschaltung der von dem MCU gesteuerten LEDs. Jede LED wird mit 5\,V Spannung versorgt. Jeweils ein Widerstand begrenzt den Strom um das Durchbrennen der LED zu verhindern. Da für die vorhandenen LEDs keine Datenblätter verfügbar sind, werden alle Vorwiderstände mit 120\,Ohm dimensioniert. Das eigentliche Ein- und Ausschalten wird über jeweils einen Transistor realisiert. Die Basen des Transistoren werden mit jeweils einem Ausgang des MCUs verbunden. Der Benutzer soll die Möglichkeit besitzen die Helligkeit der LEDs je nach Anforderung zu verändern. Dazu werden die Kollektoren aller LED-Schalttransistoren auf den Emitter eines weiteren Transistors \textit{TB} geschaltet. Die Basis wird mit einem Ausgangaspin des MCUs verbunden, der mittels eines Timers ein Pulsweitenmoduliertes-Signal (PWM-Signal) ausgeben kann. Mihilfe einer Anpassung der Pulsweite kann so die Helligkeit aller LEDs reguliert werden. \\
+Abbildung \ref{fig:LED-Schaltung} zeigt die Verschaltung der von dem MCU gesteuerten LEDs. Jede LED wird mit 5\,V Spannung versorgt. Jeweils ein Widerstand begrenzt den Strom um ein Durchbrennen der LED zu verhindern. Da für die vorhandenen LEDs keine Datenblätter verfügbar sind, werden alle Vorwiderstände mit 120\,Ohm dimensioniert. Das eigentliche Ein- und Ausschalten wird über jeweils einen Transistor realisiert. Die Basen des Transistoren werden mit jeweils einem Ausgang des MCUs verbunden. Der Benutzer soll die Möglichkeit besitzen die Helligkeit der LEDs je nach Anforderung zu verändern. Dazu werden die Kollektoren aller LED-Schalttransistoren auf den Emitter eines weiteren Transistors \textit{TB} geschaltet. Die Basis wird mit einem Ausgangaspin des MCUs verbunden, der mittels eines Timers ein Pulsweitenmoduliertes-Signal (PWM-Signal) ausgeben kann. Mihilfe einer Anpassung der Pulsweite kann so die Helligkeit aller LEDs reguliert werden. Je kürzer die Pulsweite ist, also je kürzer die LED eingeschlatet ist, so weniger hell erscheint sie. Die Frequenz des Pulsweitenoduliert Signals muss dabei so hoch sein, dass für das menliche Auge nicht mehr ersichtlich ist wann die LED leuchtet oder nicht.\\
 %Hier noch mehr zu PWM schreiben. Verweis aus Kapitel Software/Einstellungen
 %Dimensionierung der Vorwiderstände
 %In der aktuellen Version des Aufnahmegerätes sind die Vorwiderstände aller LEDs pauschal mit 120\,Ohm dimensioniert, was in stark unterschiedlichen Helligkeiten der einzelnen LEDs resultiert. 
