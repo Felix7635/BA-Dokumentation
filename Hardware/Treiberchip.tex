@@ -13,6 +13,7 @@ Für das Senden und Empfangen von DMX-Daten wird eine galvanisch getrennte RS485
 Abbildung \ref{fig:MAXfd} zeigt den schematischen Aufbau des Treiberchips inklusive dessen typischer Beschaltung. Im blau markierten Bereich befindet sich die galvanische Trennung des Chips. Die gestrichelte Linie in der Mitte markiert die Trennung der Seiten $A$ und $B$. Die Funktionen der Pins können Tabelle \ref{tab:MAX_pins} entnommen werden. Die linke Seite ($A$ Seite) ist dem Mikrocontroller zugewendet und wird mit dem 5\,V Potential der USB-Schnittstelle versorgt und mit einem 0,1\,$\mu$F und 1\,$\mu$F Kondensator in Parallelschaltung gestützt. Die Kondensatoren sollen laut Datenblatt möglicht nah am Treiberchip platziert werden. Pin $TXD$ wird mit dem Ausgang, Pin $RXD$ mit dem Eingang der UART-Schnittstelle des MCUs verbunden. Zum aktivieren des Senders oder Empfängers des Treibers muss ein entsprechender Logikpegel an den Pins $DE$ und $\overline{RE}$ anliegen. Da die Logik des Pins zum aktivieren und deaktivieren des Empfängers invertiert ist, können beide Pins kurzgeschlossen werden und mit einem Ausgang des MCUs verbunden werden. Ein interner pulldown-Widerstand an beiden Pins ermöglicht die direkte Verbindung zum MCU ohne weitere Beschaltung. Die rechte Seite ($B$ Seite) des Treiberchips muss, um die galvanische Trennung zu gewährleisten, mit einer entsprechend getrennten Spannungsquelle versorgt werden. Diese wird mithilfe eines DC/DC Konverters, der die von der USB-Schnittstelle eingehenden 5\,V isoliert und am Ausgang wieder ausgibt \cite{DC_MN}. Um eine möglichst stabile Spannungsversorgung zu gewährleisten, wird der im Treiberchip interne $low-dropout$-Spannungsregler vewendet, wodurch Pin $V_{DDB}$ als Ausgang der stabilisierten Spannung fundiert. Pin $V_{DDB}$ und $V_{LDO}$ werden mit jeweils einem 0,1\,$\mu$F und parallegeschlaltetem 1\,$\mu$F Kondensator mit $GNDB$ verbunden.
 \begin{table}[h]
 	\begin{center}
+			\caption{Pinbeschreibung MAX14945EWE+ \cite[S.12-13]{MAX14945MN}}
 		\begin{tabular}{l | l}
 			\textbf{Pin} & \textbf{Funktion}\\
 			\hline
@@ -26,7 +27,6 @@ Abbildung \ref{fig:MAXfd} zeigt den schematischen Aufbau des Treiberchips inklus
 			$V_{DDB}$ \& $GNDB$ & Spannungsversorgung $B$ Seite\\
 			$V_{LDO}$ & Spannungsregler Eingang $B$ Seite
 		\end{tabular}
-	\caption{Pinbeschreibung MAX14945EWE+ \cite[S.12-13]{MAX14945MN}}
 	\label{tab:MAX_pins}
 	\end{center}
 \end{table}

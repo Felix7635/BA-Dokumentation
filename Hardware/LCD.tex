@@ -22,6 +22,7 @@ Das LCD-Display ist der wichtigste Bestandteil der Benutzerschnittstelle. Auf ih
 Im Auslieferungszustand (Abbildung \ref{fig:LCD-front} und \ref{fig:LCD-back}) besteht das Modul aus einer großen grünen Platine mit dem fest verbauten LCD-Display darauf und einem an die 16\,Pins gelöteten $I^2C$-Modul\footnote{Bussystem zur seriellen Übertragung von Daten \cite[S. 61]{MCU_in_Practice}} (kleine schwarze Platine) mit der das Beschreiben des Displays mittels serieller Übertragung möglich ist. Der Vorteil der seriellen Datenübertragung mittels $I^2C$ ist, dass nur eine Datenleitung, eine Taktleitung und das 0\,V-Potential mit dem MCU verbunden werden müssen. Ein Nachteil stellt die Übertragungsgeschwindigkeit dar, denn alle Bits müssen nacheinander übertragen werden. Geht man davon aus, dass die gleiche Taktrate bei einer parallelen Datenübertragung mit 8\,Bits erreicht wird, so ist die Übertragungsrate der seriellen Übertragung mindestens um den Faktor 8 kleiner, da zu den 8 zu übertragenden Bits eine Start-Bedingung des $I^2C$-Protokolls hinzukommt \cite[S. 62]{MCU_in_Practice}. Da die Geschwindigkeit der Übertragung von besonderer Bedeutung ist, wird das $I^2C$-Modul von dem Modul entfernt und stattdessen die parallele 8-Bit Datenübertragung verwendet. Insgesamt werden elf Leiterbahnen vom LCD-Modul direkt zum MCU geführt. Die einzelnen Funktionen der Pins des LCD-Moduls können Tabelle \ref{tab:LCD_Pins} entnommen werden. Die Pin-Paare $VDD$/$VSS$ und $A$/$K$ werden jeweils mit dem 5\,V und 0\,V Potential der USB-Schnittstelle beschaltet. Pin $R/\overline{W}$ wird außerdem mit dem 0\,V Potential verbunden, da das LCD-Display ausschließlich vom MCU beschrieben und nicht gelesen werden soll. Die übrigen Pins werden direkt mit dem MCU verbunden. Der Kontrast des Display wird mit einer analogen Spannung an Pin $VO$ eingestellt, welche als Pulsweitenmoduliertes Signal vom MCU ausgeht.
 \begin{table}[h]
 	\begin{center}
+		\caption{LCD-Pinbelegung \cite[s. 7]{LCD_MN}}
 		\begin{tabular}{l | l}
 			\textbf{Pin} & \textbf{Funktion}\\
 			\hline
@@ -33,7 +34,6 @@ Im Auslieferungszustand (Abbildung \ref{fig:LCD-front} und \ref{fig:LCD-back}) b
 			R/W & Read/Write-Modus\\
 			VO & LCD-Kontrast\\
 		\end{tabular}
-	\caption{LCD-Pinbelegung \cite[s. 7]{LCD_MN}}
 	\label{tab:LCD_Pins}
 	\end{center}
 \end{table}\\
