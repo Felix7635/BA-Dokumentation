@@ -1,7 +1,7 @@
 % !TEX root = BA-Bauer.tex
 
 \subsection{STMicroelectronics STM32CubeIDE}
-Nachdem der Grundcode von CubeMX generiet ist, wird der Programmcode mithilfe der Entwicklungsumgebung STM32CubeIDE von STMicroelectronics\textsubscript{®} erstellt. Sie ist speziell für die Entwicklung von Programmcode für STM32 Mikrocontroller und -prozessoren ausgelegt und beinhaltet neben der Kompilierung von Code auch debugging-Funktionalitäten. Durch die Einbindung von CubeMX in der Entwicklungsumgebung wird keine weitere Software zum Programmieren eines STM32 Mikrocontrollers oder -prozessors benötigt. Jederzeit kann die Kofiguration in CubeMX geändert und ein neuer Grundcode generiert werden \cite{CubeIDE}. Code der vom Benutzer geschrieben wurde, wird bei diesem Vorgang nicht verändert. Voraussetzung dafür ist die Position des Benutzer-Programmcodes innerhalb der $USER\ CODE$-Blöcke (\ref{code:usercode}).
+Nachdem der Grundcode von CubeMX generiert ist, wird der Programmcode mithilfe der Entwicklungsumgebung STM32CubeIDE von STMicroelectronics\textsubscript{®} erstellt. Sie ist speziell für die Entwicklung von Programmcode für STM32 Mikrocontroller und -prozessoren ausgelegt und beinhaltet neben der Kompilierung von Code auch debugging-Funktionen. Durch die Einbindung von CubeMX in der Entwicklungsumgebung wird keine weitere Software zum Programmieren eines STM32 Mikrocontrollers oder -prozessors benötigt. Die Konfiguration kann jederzeit in CubeMX geändert und ein neuer Grundcode generiert werden \cite{CubeIDE}. Code, der vom Benutzer geschrieben wurde, wird bei diesem Vorgang nicht verändert. Voraussetzung dafür ist die Position des Benutzer-Programmcodes innerhalb der $USER\ CODE$-Blöcke (\ref{code:usercode}).
 \lstinputlisting[
 caption = main.c: USER CODE Block,
 label = code:usercode, 
@@ -10,5 +10,5 @@ firstnumber = 106,
 firstline = 106, 
 lastline = 108]
 {/Users/Felix/Documents/CubeMX/BPA-Code/Core/Src/main.c}
-Code der zwischen der $BEGIN$ und $END$-Zeile geschrieben steht, wird bei einer Neugenerierung des Grundcodes durch CubeMX beibehalten. Diese Blöcke finden sich an verschiedenen Stellen und Dateien wieder.\\
+Code, der zwischen der $BEGIN$- und $END$-Zeile geschrieben steht, wird bei einer Neugenerierung des Grundcodes durch CubeMX beibehalten. Diese Blöcke finden sich an verschiedenen Stellen und Dateien wieder.\\
 

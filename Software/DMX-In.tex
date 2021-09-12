@@ -18,8 +18,8 @@ static void Save_Byte_Rx()
 	}
 }
 \end{lstlisting}
-Zunächst wird in Zeile 444 das eingegangene Datenbyte aus dem $DR$-Register der UART-Schnittstelle dem Zeiger auf das Puffer-Array (\textit{huart4.pRxBuffPtr}) zugewiesen und dieser anschließend um einer Stelle inkrementiert.
-Darauf folgt eine $if$-Abfrage, die Identifiziert, ob alle erwarteten Datenbytes empfangen sind. Bei einem Aufruf der Empfangsfunktion $HAL\_UART\_Receive\_IT(...)$ zum Starten des Empfangsvorgangs der UART-Schnittstelle wird die Anzhal der zu empfangenen Datenbytes der Vaiable $RxXferCount$ zugewiesen und wird bei jedem empfangenen Datenbyte um eine Stelle dekrementiert. Enthält die Variable nach der Dekrementierung den Wert 0, so sind alle Datenbytes empfangen und ein entsprechender $Callback$ wird aufgerufen. Dieser befindet sich in der Datei $DMX.c$ und ist in Codeausschnitt \ref{code:rxIT} zu sehen. 
+Zunächst wird in Zeile 444 das eingegangene Datenbyte aus dem $DR$-Register der UART-Schnittstelle dem Zeiger auf das Puffer-Array (\textit{huart4.pRxBuffPtr}) zugewiesen und der Zeiger anschließend um einer Stelle inkrementiert.
+Darauf folgt eine $if$-Abfrage, die identifiziert, ob alle erwarteten Datenbytes empfangen sind. Bei einem Aufruf der Empfangsfunktion $HAL\_UART\_Receive\_IT(...)$ zum Starten des Empfangsvorgangs der UART-Schnittstelle wird die Anzahl der zu empfangenden Datenbytes der Variable $RxXferCount$ zugewiesen und wird bei jedem empfangenen Datenbyte um eine Stelle dekrementiert. Enthält die Variable nach der Dekrementierung den Wert 0, so sind alle Datenbytes empfangen und ein entsprechender $Callback$ wird aufgerufen. Dieser befindet sich in der Datei $DMX.c$ und ist in Codeausschnitt \ref{code:dmx.c-rxIT} zu sehen. 
 \lstinputlisting[
 caption = DMX.c: Callback-Funktion eingehender UART-Daten,
 label = code:dmx.c-rxIT, 
@@ -28,9 +28,9 @@ firstnumber = 103,
 firstline = 103, 
 lastline = 113]
 {/Users/Felix/Documents/CubeMX/BPA-Code/Core/Src/DMX.c}
-Wenn die Callback Funktion aufgerufen wird, ist ein DMX-Datenpaket vollständig empfangen. Dem Hauptprogramm wird das mithilfe der Zuweisung der Variable $RxComplete$ mit dem Wert 1 signalisiert. Die Variable der Anzahl der empfangenen Datenpakete $received\_packets$ wird außerdem inkrementiert. Das Ein- bzw. Ausschalten der Empfangs-LED ($LED\_RX$) gibt dem Benutzer eine Rückmeldung über den erfolgreichen Empfang eines DMX-Datenpaketes. Ist durch das Hauptprogramm die Variable $recording$ nicht mit dem  Wert 1 beschrieben, also findet keine aktive Speicherung der Daten statt, wird die Status-LED ein- bzw. ausgeschaltet. Der Benutzer bekommt somit eine Rückmeldung über den Datenfluss bevor eine Aufnahme aktiv gestartet wird. Somit kann sichergagengen werden, dass DMX-Daten fehlerfrei eingehen und bei einem Start der Aufnahme keine unerwarteten Fehler im Bezug auf den Datenfluss auftreten.
+Wenn die Callback Funktion aufgerufen wird, ist ein DMX-Datenpaket vollständig empfangen. Dem Hauptprogramm wird dies mithilfe der Zuweisung der Variable $RxComplete$ mit dem Wert 1 signalisiert. Die Variable der Anzahl der empfangenen Datenpakete $received\_packets$ wird außerdem inkrementiert. Das Ein- bzw. Ausschalten der Empfangs-LED ($LED\_RX$) gibt dem Benutzer eine Rückmeldung über den erfolgreichen Empfang eines DMX-Datenpaketes. Ist durch das Hauptprogramm die Variable $recording$ nicht mit dem  Wert 1 beschrieben, also findet keine aktive Speicherung der Daten statt, wird die Status-LED ein- bzw. ausgeschaltet. Der Benutzer bekommt somit eine Rückmeldung über den Datenfluss bevor eine Aufnahme aktiv gestartet wird. Somit kann sichergegangen werden, dass DMX-Daten fehlerfrei eingehen und bei einem Start der Aufnahme keine unerwarteten Fehler im Bezug auf den Datenfluss auftreten.
 \newline
-Nach der Bearbeitung des Callbacks wird als letzter Schritt die Funktion $Reset\_Rx()$ (Codeausschnitt \,\ref{code:itResetRx})aufgerufen. In ihr werden alle Variablen der UART-Schnittstelle auf die für den Empfang eines neuen DMX-Datenpaketes benötigten Initialwerte zurückgesetzt.
+Nach der Bearbeitung des Callbacks wird als letzter Schritt die Funktion $Reset\_Rx()$ (Codeausschnitt \,\ref{code:itResetRx}) aufgerufen. In ihr werden alle Variablen der UART-Schnittstelle auf die für den Empfang eines neuen DMX-Datenpaketes benötigten Initialwerte zurückgesetzt.
 \begin{lstlisting}[caption = stm32f4xx\_it.c: UART Reset\_Rx(),
 	label = code:itResetRx, 
 	language = C, 
@@ -43,7 +43,7 @@ Nach der Bearbeitung des Callbacks wird als letzter Schritt die Funktion $Reset\
 		(void)*huart4.pRxBuffPtr--;
 	}
 \end{lstlisting}
-Das zweite wichtige Event der UART-Schnittstelle ist der $Framing-Error$ ($FE$) der das Ende des DMX-Datenpaketes signalisiert. Codausschnitt \ref{code:itFE} zeigt den Auschnitt der Behandlung eines $FE$ in der globalen Interrupt-Funktion der UART-Schnittstelle. Wird ein $FE$ identifiziert, so muss zunächst das Bit, welches den Error anzeigt zurückgesetzt werden damit die Funktion nicht unmittelbar nach dem Beenden ernuet aufgerufen wird.
+Das zweite wichtige Event der UART-Schnittstelle ist der $Framing-Error$ ($FE$), der das Ende des DMX-Datenpaketes signalisiert. Codeausschnitt \ref{code:itFE} zeigt den Ausschnitt der Behandlung eines $FE$ in der globalen Interrupt-Funktion der UART-Schnittstelle. Wird ein $FE$ identifiziert, so muss zunächst das Bit, welches den Error anzeigt, zurückgesetzt werden, damit die Funktion nicht unmittelbar nach dem Beenden erneut aufgerufen wird.
 \begin{lstlisting}[caption = stm32f4xx\_it.c: UART Framing Error,
 	label = code:itFE, 
 	language = C, 
@@ -55,7 +55,7 @@ if (((isrflags & USART_SR_FE) != RESET) && ((cr3its & USART_CR3_EIE) != RESET))
 	huart4.ErrorCode |= HAL_UART_ERROR_FE;
 }
 \end{lstlisting}
-Mithilfe der Funktion $Clear\_Rx\_Error()$, dessen Inhalt Codesausschnitt \ref{code:itErrorclear} zeigt, wird druch einen Lesevorgang des entsprechenden Status-Registers $SR$ und des Daten-Registers $DR$ alle gesetzten Bits auf den Initialwert zurückgesetzt. Anschließend wird die Funktion $Reset\_Rx()$ aufgerufen. Zuletzt wird der $ErrorCode$ der UART-Schnittstelle mit dem entsprechenden $FE$ Error-Code beschrieben. 
+Mithilfe der Funktion $Clear\_Rx\_Error()$, deren Inhalt Codeausschnitt \ref{code:itErrorclear} zeigt, werden durch einen Lesevorgang des entsprechenden Status-Registers $SR$ und des Daten-Registers $DR$ alle gesetzten Bits auf den Initialwert zurückgesetzt. Anschließend wird die Funktion $Reset\_Rx()$ aufgerufen. Zuletzt wird der $ErrorCode$ der UART-Schnittstelle mit dem entsprechenden $FE$ Error-Code beschrieben. 
 \begin{lstlisting}[caption = stm32f4xx\_it.c: UART Clear\_Rx\_Error(),
 	label = code:itErrorclear, 
 	language = C, 
@@ -68,7 +68,7 @@ static void Clear_Rx_Error()
 	Reset_Rx();
 }
 \end{lstlisting}
-Dieser Ablauf findet außerdem bei allen anderen auftretenden Fehlern statt um fehlerhafte Datensätze zu verhindern. Nur wenn ein vollständiges Datenpaket empfangen ist oder das Datenpaket durch einen $FE$ als beendet erklärt ist, wird dieses für die Speicherung dem Hauptprogramm \"freigegeben\".\\
+Dieser Ablauf findet außerdem bei allen anderen auftretenden Fehlern statt, um fehlerhafte Datensätze zu verhindern. Nur wenn ein vollständiges Datenpaket empfangen ist oder das Datenpaket durch einen $FE$ als beendet erklärt ist, wird dieses für die Speicherung dem Hauptprogramm freigegeben.\\
 \newline
 \textbf{Optimierungsmöglichkeiten}\\
-Aus progammatischer Sicht ist die Verteilung des Codes über mehrere Dateien nicht besonders elegant und erschwert die Implementierung in zukünftigen Projekten. Besser wäre es den Code vollständig in den Dateien DMX.c und DMX.h unterzubringen. Das erleichtert die Übersichtlichkeit des Programms und beugt damit Fehlern vor. Zudem ist es sinnvoll jeden der bei der Übertragung auftretenden Fehler anders zu behandeln um z.B. eine Fehlerkorrektur durchzuführen und unnötig großen Datenverlust zu verhindern. Anstatt ein komplettes Datenpaket zu ignorieren sobald ein Byte fehlerhaft ist, könnte der Wert des Fehlerhaften Bytes aus dem vorherigen Datenpaket übernommen werden. Damit reduziert sich der Datenverlust von einem Datenpaket auf ein eventuell falsches Daten-Byte. Entsprechende Infomationen über den Anteil von Fehlerhaften Datenpaketen ober -Bytes könnten für den Benutzer ersichtlich dargestellt werden und eine Rückmeldung über die generelle Übetragungsqualität geben.
+Aus programmatischer Sicht ist die Verteilung des Codes über mehrere Dateien nicht besonders elegant und erschwert die Implementierung in zukünftigen Projekten. Besser wäre es, den Code vollständig in den Dateien $DMX.c$ und $DMX.h$ unterzubringen. Das erhöht die Übersichtlichkeit des Programms und beugt damit Fehlern vor. Zudem ist es sinnvoll, jeden der bei der Übertragung auftretenden Fehler anders zu behandeln um z.B. eine Fehlerkorrektur durchzuführen und unnötig großen Datenverlust zu verhindern. Anstatt ein komplettes Datenpaket zu ignorieren sobald ein Byte fehlerhaft ist, könnte der Wert des fehlerhaften Bytes aus dem vorherigen Datenpaket übernommen werden. Damit reduziert sich der Datenverlust von einem Datenpaket auf ein eventuell falsches Daten-Byte. Entsprechende Informationen über den Anteil von fehlerhaften Datenpaketen oder -Bytes könnten für den Benutzer sichtbar dargestellt werden und eine Rückmeldung über die generelle Übertragungsqualität geben.
