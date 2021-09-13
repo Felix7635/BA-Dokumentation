@@ -11,24 +11,30 @@
 @Manual{F446RM,
   title  = {RM0390 Reference manual},
   author = {STMicroelectronics},
+  note   = {abgerufen: 05.08.2021},
   year   = {2018},
   file   = {:/Users/Felix/Google Drive/BPA/Abgabe/Anhang A2/Hardware/Datenblätter/stm32f446re Reference Manual.pdf:PDF},
+  url    = {https://www.st.com/resource/en/reference_manual/dm00135183-stm32f446xx-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf},
 }
 
 @Manual{STM32F446ZE_Datasheet,
   title  = {{STM}32F446x{C}/{E} - {D}atasheet - production data},
   author = {STMicroelectronics},
+  note   = {abgerufen: 05.08.2021},
   year   = {2021},
   file   = {:/Users/Felix/Downloads/stm32f446ze.pdf:PDF},
+  url    = {https://www.st.com/resource/en/datasheet/stm32f446re.pdf},
 }
 
 @Manual{F446RE_UM,
   title    = {U{M}1724 {U}ser manual},
   author   = {STMicroelectronics},
+  note     = {abgerufen: 17.08.2021},
   year     = {2019},
   abstract = {User manual
 STM32 Nucleo64 boards (MB1136)},
   file     = {:/Users/Felix/Google Drive/BPA/Abgabe/Anhang A2/Hardware/Datenblätter/STM32 Nucleo User Manual.pdf:PDF},
+  url      = {https://www.st.com/resource/en/user_manual/um1724-stm32-nucleo64-boards-mb1136-stmicroelectronics.pdf},
 }
 
 @InBook{Ehrhardt1992,
@@ -42,7 +48,6 @@ STM32 Nucleo64 boards (MB1136)},
   abstract  = {Eine Phasenregelschleife (PLL, Phase Locked Loop) ist ein Schaltkreis der einem externen Referenzsignal erlaubt, die Frequenz und die Phase eines Oszillators in der Schleife zu steuern. Die Frequenz des Oszillators in der Schleife kann dabei dieselbe wie die Referenzfrequenz sein oder ein Vielfaches davon. Wenn die Referenzfrequenz von einem Quarzoszillator kommt, k{\"o}nnen daraus mittels der PLL Frequenzen abgeleitet werden, die dieselbe Stabilit{\"a}t besitzen wie die des Quarzoszillators (z.B. bei der Anwendung als Synthesizer).},
   booktitle = {Verst{\"a}rkertechnik},
   doi       = {10.1007/978-3-322-83026-5_24},
-  url       = {https://doi.org/10.1007/978-3-322-83026-5_24},
 }
 
 @Manual{QuartzMN,
@@ -55,17 +60,21 @@ STM32 Nucleo64 boards (MB1136)},
 @Manual{OscillatorAN,
   title    = {AN2867 Application note},
   author   = {STMicroelectronics},
+  note     = {abgerufen: 26.08.2021},
   year     = {2020},
   abstract = {Oscillator design guide for STM8AF/AL/S, STM32 MCUs and MPUs},
   file     = {:/Users/Felix/Google Drive/BA/Datenblätter/oscillator-design-guide-for-stm8afals-stm32-mcus-and-mpus-stmicroelectronics.pdf:PDF},
+  url      = {https://www.st.com/resource/en/application_note/cd00221665-oscillator-design-guide-for-stm8afals-stm32-mcus-and-mpus-stmicroelectronics.pdf},
 }
 
 @Manual{MAX14945MN,
   title        = {M{A}{X}14945},
+  note         = {abgerufen: 22.08.2021},
   organization = {Maxim Integrated},
   year         = {2017},
   abstract     = {2.75kVRMS Isolated 500kbps Half-Duplex RS-485/RS-422 Transceiver with ±30kV ESD Protection},
   file         = {:documents/Datasheets/MAX14945-964806.pdf:PDF},
+  url          = {https://datasheets.maximintegrated.com/en/ds/MAX14945.pdf},
 }
 
 @Misc{LDO,
@@ -90,6 +99,7 @@ STM32 Nucleo64 boards (MB1136)},
 @Manual{EncoderMN,
   title        = {{S}pecifications {N}o. 12{E}2006-3023},
   month        = nov,
+  note         = {abgerufen: 22.08.2021},
   organization = {ALPS Electric co., ltd.},
   year         = {2006},
   abstract     = {This specifitacions apply to {E}{C}12{E}2420404 rotary encoders.
@@ -97,17 +107,16 @@ Contents of this specifications
 F3517264M
 LE212},
   file         = {:documents/Datasheets/Encoder - 0900766b810a5d50.pdf:PDF},
+  url          = {https://docs.rs-online.com/7fab/0900766b810a5d50.pdf},
 }
 
 @Book{TechInfo,
   author    = {Günter Kemnitz},
   publisher = {Springer},
-  title     = {Technische {I}nformatik},
+  title     = {Technische {I}nformatik - {Entwurf digitaler Schaltungen}},
   year      = {2011},
-  edition   = {Entwurf digitaler Schaltungen},
   isbn      = {978-3-642-17446-9},
-  number    = {2},
-  volume    = {Band},
+  doi       = {10.1007/978-3-642-17447-6},
 }
 
 @Misc{eagle_homepage,
@@ -118,64 +127,69 @@ LE212},
   volume = {Webseite},
 }
 
-@Standard{USB-PD,
-  title    = {Universial {S}erial {B}us {P}ower {D}elivery {S}pecifikation},
-  author   = {U{S}{B} {I}mplementers {F}orum, {I}nc.},
-  month    = jan,
-  url      = {https://www.usb.org/document-library/usb-power-delivery},
-  year     = {2017},
-  abstract = {Revision 2.0
+@Misc{USB-PD,
+  author       = {U{S}{B} {I}mplementers {F}orum, {I}nc.},
+  howpublished = {https://www.usb.org/document-library/usb-power-delivery},
+  month        = jan,
+  title        = {Universial {S}erial {B}us {P}ower {D}elivery {S}pecifikation},
+  year         = {2017},
+  abstract     = {Revision 2.0
 Version 1.3
 Realease date: 12 January 2017},
-  file     = {:/Users/Felix/Downloads/USB Power Delivery 20210706/USB PD R2.0 V1.3 20171117/USB_PD_R2_0 V1.3 - 20170112.pdf:PDF},
+  file         = {:/Users/Felix/Downloads/USB Power Delivery 20210706/USB PD R2.0 V1.3 20171117/USB_PD_R2_0 V1.3 - 20170112.pdf:PDF},
+  url          = {https://www.usb.org/document-library/usb-power-delivery},
 }
 
-@Standard{USB-Battery,
-  title    = {Battery {C}harging {S}pecification},
+@Misc{USB-Battery,
   author   = {U{S}{B} {I}mplementers {F}orum, {I}nc.},
   month    = mar,
-  number   = {Revision 1.2},
+  note     = {abgerufen: 13.09.2021},
+  title    = {Battery {C}harging {S}pecification},
   year     = {2012},
   abstract = {(Including errata and ECNs through March 15, 2012)
 Revision 1.2
 March 15, 2012},
   file     = {:/Users/Felix/Downloads/BCv1.2_070312/BCv1.2_070312/BC1.2 plus errata 2012-3-15.pdf:PDF},
+  number   = {Revision 1.2},
+  url      = {https://www.usb.org/sites/default/files/BCv1.2_070312_0.zip},
 }
 
 @Manual{LCD_MN,
   title  = {Specification {F}or {LCD} {M}odule 2004{A}},
   author = {Shenzhen Eone Electronics co.,Ltd},
+  note   = {abgerufen: 13.09.2021},
   file   = {:documents/Datasheets/LCD_2004A.pdf:PDF},
+  url    = {https://www.beta-estore.com/download/rk/RK-10290_410.pdf},
 }
 
 @Book{MCU_in_Practice,
   author    = {I. Susnea, M. Mitescu},
-  editor    = {Dr. Kiyoo Itoh, Professor Thomas Lee, Professor Takayasu Sakurai, Professor Willy M. C. Sansen, Professor Doris Schmitt-Landsiedel},
   publisher = {Springer},
   title     = {Microcontrollers in {P}ractice},
   year      = {2005},
   isbn      = {978-3-540-25301-3},
+  doi       = {10.1007/3-540-28308-0},
 }
 
 @Manual{DC_MN,
   title        = {{DC}/{DC} {C}onverter {TEA} 1 {S}eries, 1 {W}att},
   month        = apr,
-  note         = {Rev. April 27, 2020},
+  note         = {abgerufen: 23.08.2021},
   organization = {Traco Electronic AG},
   year         = {2020},
   abstract     = {The TEA 1 is an unregulated 1 Watt DC/DC SIP-4 converter series which is specifically designed to offer a low-cost solution while keeping a high quality standard. This new series focuses on a simple but effective design approach, which minimizes component and labor cost and is complemented with a com- plete automatization of the manufacturing process. An operating temperature range from -40°C to 85°C without derating and an I/O-isolation of 1’500 VDC enables this series to cover many different applications. The industry standard package of this converter offers a broad application range in any space, cost critical application and is especially suited for high volume projects where sim- ple but reliable products are needed.},
   file         = {:documents/Datasheets/Traco Power DC\:DC Converter.pdf:PDF},
+  url          = {https://docs.rs-online.com/3289/A700000007055153.pdf},
 }
 
 @Misc{FATFS,
-  author       = {Elm Chan},
-  howpublished = {Webseite},
-  month        = apr,
-  note         = {abgerufen: 19.08.2021},
-  title        = {Fat{F}s - {G}eneric {FAT} {F}ilesystem {M}odule},
-  year         = {2021},
-  abstract     = {FatFs is a generic FAT/exFAT filesystem module for small embedded systems. The FatFs module is written in compliance with ANSI C (C89) and completely separated from the disk I/O layer. Therefore it is independent of the platform. It can be incorporated into small microcontrollers with limited resource, such as 8051, PIC, AVR, ARM, Z80, RX and etc. Also Petit FatFs module for tiny microcontrollers is available here.},
-  url          = {http://elm-chan.org/fsw/ff/00index_e.html},
+  author   = {Elm Chan},
+  month    = apr,
+  note     = {abgerufen: 19.08.2021},
+  title    = {Fat{F}s - {G}eneric {FAT} {F}ilesystem {M}odule},
+  year     = {2021},
+  abstract = {FatFs is a generic FAT/exFAT filesystem module for small embedded systems. The FatFs module is written in compliance with ANSI C (C89) and completely separated from the disk I/O layer. Therefore it is independent of the platform. It can be incorporated into small microcontrollers with limited resource, such as 8051, PIC, AVR, ARM, Z80, RX and etc. Also Petit FatFs module for tiny microcontrollers is available here.},
+  url      = {http://elm-chan.org/fsw/ff/00index_e.html},
 }
 
 @Misc{CubeIDE,
@@ -192,6 +206,7 @@ March 15, 2012},
   title     = {Embedded {S}ystems für {I}o{T}},
   year      = {2019},
   isbn      = {978-3-662-57901-5},
+  doi       = {10.1007/978-3-662-57901-5},
 }
 
 @Book{BetriebssystemeKompakt,
@@ -204,6 +219,21 @@ March 15, 2012},
   abstract  = {Eine kompakte und gut verständliche Einführung in das Thema
 Die Inhalte werden seit Jahren in Praxis und Lehre erfolgreich eingesetzt
 Grundlagenwissen zu Betriebssystemen im handlichen Taschenbuchformat},
+  doi       = {10.1007/978-3-662-61411-2},
+}
+
+@Misc{git_lcd,
+  author = {Olivier-(4ilo)},
+  note   = {abgerufen: 13.09.2021},
+  title  = {{HD44780-Stm32HAL}},
+  url    = {https://github.com/Felix7635/HD44780-Stm32HAL},
+}
+
+@Misc{git_bpa_code,
+  author = {Felix7635},
+  note   = {abgerufen: 13.09.2021},
+  title  = {{BPA-Code}},
+  url    = {https://github.com/Felix7635/BPA-Code},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
