@@ -1,6 +1,8 @@
-\documentclass[12p, a4paper, left = 3.5cm, right = 1.5cm, top = 2.5cm, bottom = 2cm]{article}
+\documentclass[12p, a4paper]{article}
 
 \usepackage[headsepline, footsepline]{scrlayer-scrpage}
+\usepackage[hidelinks]{hyperref}
+
 \pagestyle{scrheadings}
 \ihead{Bachelorabschlussarbeit}
 \ohead{\headmark}
@@ -11,10 +13,11 @@
 \renewcommand{\arraystretch}{1.5}
 
 \usepackage{listings}
-\lstset{numbers = left, numberstyle = \tiny, numbersep = 5pt, language = C, keywordstyle = \color{blue}, stringstyle = \color{teal}, commentstyle = \color{gray}, morecomment = [l][\color{orange}]{\#}, caption={\protect\filename@parse{\lstname}\protect\filename@base\\.\protect\filename@ext}}
+\lstset{numbers = left, numberstyle = \tiny, numbersep = 5pt, language = C, keywordstyle = \color{blue}, stringstyle = \color{teal}, commentstyle = \color{gray}, morecomment = [l][\color{orange}]{\#}, caption={\protect\filename@parse{\lstname}\protect\filename@base\\.\protect\filename@ext},
+basicstyle=\sffamily}
 \renewcommand{\lstlistingname}{Codeausschnitt}
 \usepackage{pdfpages}
-\usepackage[german]{babel}
+\usepackage[ngerman]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[top = 25mm, bottom = 20mm, left = 25mm, right = 25mm]{geometry}
 \usepackage[onehalfspacing]{setspace}
@@ -26,6 +29,7 @@
 \begin{document}
 	\input{Titelblatt}
 	\input{Selbstständigkeitserklärung}
+	\input{Gender}
 	\input{Inhaltsverzeichnis}
 	\input{Abkürzungsverzeichnis}
 	\input{Einleitung}
@@ -33,6 +37,7 @@
 	\input{Hardware}
 	\input{Software}
 	\input{Zusammenfassung}
+	\input{Danksagung}
 	\input{Literatur}
 	\input{Abbildungen}
 	\input{Codeausschnitt}
